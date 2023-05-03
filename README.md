@@ -35,3 +35,7 @@ git log
 ```
 git status
 ```
+- Añadir una url para enviar
+```
+git remote add origin [url]
+```
