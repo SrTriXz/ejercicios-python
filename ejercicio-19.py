@@ -5,6 +5,6 @@ def par_o_impar(numero):
         else:
             print(f"{i} el numero es impar")
 
-albert = int(input("ingrese un numero porfavor: "))
-print(par_o_impar(albert + 1))
+arberto_instantaneo = int(input("ingrese un numero porfavor: "))
+print(par_o_impar(arberto_instantaneo + 1))
 
