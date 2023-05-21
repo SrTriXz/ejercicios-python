@@ -1,51 +1,100 @@
-#crear funa agenda pero con funciones
-contactos = {}
-def añadir(nombre, numero):
-    contactos[nombre]=numero
+#lista de tareas
+#dia quiere ver, y que le muestre que tareas tiene ese dia
+#si no tiene tareas, preguntarle si quiere añadir una tarea
 
-    return (f"{nombre} se ha añadido correctamente")
 
-def eliminar(nombre):
-    del(contactos[nombre])
+from colorama import Back, Fore, init
+
+listaPendientes = {
+    "LUNES":[] , 
+    "MARTES": [],
+    "MIERCOLES": [],
+    "VIERNES": [],
+    "JUEVES": [],
+}
     
-def lista():
-    print(contactos)
+
+
+def añadir():
+    pendiente = input("¿Qué deseas agregar?\n=> ")
+    dia = input("¿Pa qué dia de la semana?\n=> ").upper()
+
+    if not (dia in listaPendientes.keys()):
+        print("El día que has digitado no existe.\n\n")
+        return añadir()
+
+    listaPendientes[dia].append(pendiente)
+
+def mostrarDia(dia):
+    print(f"{Fore.BLACK}{Back.LIGHTGREEN_EX}====={dia}====={Fore.RESET}{Back.RESET}")
+    dia = listaPendientes[dia]
+    for i, pendiente in enumerate(dia):
+        print(f"\t{i}) {pendiente}")
+    if len(dia) == 0:
+        print("\tNo hay tareas aún...")
+
+def eliminar():
+    dia = input("¿A que dia quieres acceder?\n").upper()
+    mostrarDia(dia)
+
+    if not (dia in listaPendientes.keys()):
+        print("El día que has digitado no existe.\n\n")
+        return eliminar()
+    dia = listaPendientes[dia]
+    numPendiente = int(input("¿Que número pendiente deseas eliminar?\n=> "))
+
+    if numPendiente >= len(dia):
+        print("El índice no es acorde a los elementos.\n\n")
+        return eliminar()
+
+    eliminado = dia.pop(numPendiente)
     
-while True:
-    print("0: AÑADIR \n 1: ELIMINAR \n 2: LISTA DE CONTACTOS")
-    funcion = int(input("ingrese que quiere hacer"))
+    print(f"La tarea '{eliminado}' ha sido eliminada con éxito")
 
-    while funcion > 2:
-        print("ingrese correctamente el nombre")
-        if funcion <= 2:
-            break 
+def listar():
+    dias = listaPendientes.keys()
+    for dia in dias:
+        mostrarDia(dia)
+       
 
-    if funcion == 0:
-        print("A QUIEN DESEAS AÑADIR")
+def chao():
+    print(f"{Fore.YELLOW}Hasta pronto!!")
+    exit()
 
-        nom = input("nombre: ")
-        num = int(input("numero: "))
-
-        añadir(nom,num)
-
-    elif funcion == 1:
-        print("A QUIEN DESEAS ELIMINAR")
-        nom = input("nombre: ")
-        while True:
-            if nom not in contactos:
-                print(f"{nom} no se encuntra en la lista de contactos")
-            
-            else:
-                break
-
-            eliminar(nom)
-
-    else:
-        for nombre, numero in enumerate(contactos):
-            print(nombre, numero)
+init()
 
 
 
+msg = \
+f"""
+{Fore.GREEN}0) AÑADIR
+{Fore.RED}1) ELIMINAR
+{Fore.BLUE}2) MOSTRAR LISTA DE PENDIENTES
+{Fore.MAGENTA}3) SALIR DE LA AGENDA
+{Fore.RESET}{Back.RESET}
+"""
+print(f"{Back.RED}{Fore.BLACK}-----BIENVENIDOS A TU AGENDA PERSONAL-----{Fore.RESET}{Back.RESET}")
+
+try:
+    while True:
+        print(msg)
+        usuario = int(input("=> "))
+        opciones = [añadir, eliminar, listar, chao]
+        if usuario >= len(opciones):
+            print(f"{Back.RED}{Fore.BLACK}No existe esa opción{Fore.RESET}{Back.RESET}\n\n")
+            continue
+        accion = opciones[usuario]
+        accion()
+except KeyboardInterrupt:
+    chao()
 
 
-        
+
+
+
+
+
+
+
+
+#fin
