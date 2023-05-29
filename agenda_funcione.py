@@ -1,27 +1,25 @@
-#lista de tareas
-#dia quiere ver, y que le muestre que tareas tiene ese dia
-#si no tiene tareas, preguntarle si quiere añadir una tarea
 
+from colorama import Back, Fore, init           #funcion para poner colores
 
-from colorama import Back, Fore, init
-
-listaPendientes = {
+listaPendientes = {             
     "LUNES":[] , 
     "MARTES": [],
     "MIERCOLES": [],
-    "VIERNES": [],
     "JUEVES": [],
+    "VIERNES": []
 }
     
 
 
 def añadir():
     pendiente = input("¿Qué deseas agregar?\n=> ")
-    dia = input("¿Pa qué dia de la semana?\n=> ").upper()
+    while True:
+        dia = input("¿Pa qué dia de la semana?\n=> ").upper()
 
-    if not (dia in listaPendientes.keys()):
-        print("El día que has digitado no existe.\n\n")
-        return añadir()
+        if not (dia in listaPendientes.keys()):
+            print("El día que has digitado no existe.\n\n")
+        else:
+            break
 
     listaPendientes[dia].append(pendiente)
 
@@ -29,7 +27,7 @@ def mostrarDia(dia):
     print(f"{Fore.BLACK}{Back.LIGHTGREEN_EX}====={dia}====={Fore.RESET}{Back.RESET}")
     dia = listaPendientes[dia]
     for i, pendiente in enumerate(dia):
-        print(f"\t{i}) {pendiente}")
+        print(f"\t{i + 1}) {pendiente}")
     if len(dia) == 0:
         print("\tNo hay tareas aún...")
 
@@ -87,6 +85,10 @@ try:
         accion()
 except KeyboardInterrupt:
     chao()
+
+
+
+
 
 
 
