@@ -1,11 +1,26 @@
-agenda = {}
 
-llave = input("QUE DESEAS AGREGAR: ")
-palabra = int(input("NUMERO QUE DESEAS AGREGAR: "))
+def separar(a):
+    for i in a:
+        if i %2 == 0:
+            pares.append(i)
 
-agenda[llave] = palabra
-print(agenda)
-otro = int(input("NUMERO QUE DESEAS AGREGAR: "))
-agenda[llave] = otro
+        else:
+            impares.append(i)
 
-print(agenda)
+    return pares, impares
+
+    
+
+
+pares=[]
+impares=[]
+lista=[]
+
+
+while True:
+    eleccion = int(input("ingrese una lista porfavor: "))
+    if eleccion == 000:
+        print(separar(lista))
+        break 
+    lista.append(eleccion)
+    print(lista)
